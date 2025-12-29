@@ -62,7 +62,7 @@ def cross_validate_model(
         "accuracy": make_scorer(accuracy_score),
         "precision": make_scorer(precision_score, average="weighted", zero_division=0),
         "recall": make_scorer(recall_score, average="weighted", zero_division=0),
-        "roc_auc": make_scorer(roc_auc_score, needs_proba=True, multi_class="ovr"),
+        "roc_auc": make_scorer(roc_auc_score, response_method="predict_proba", multi_class="ovr"),
     }
     cv = StratifiedKFold(n_splits=cv_splits, shuffle=True, random_state=42)
     results = cross_validate(
