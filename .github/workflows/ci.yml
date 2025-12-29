@@ -28,7 +28,9 @@ jobs:
       - name: Run tests
         run: pytest -q
       - name: Train models
-        run: python -m src.model_train --data data/raw/heart.csv --models-dir models --reports-dir reports
+        run: |
+          rm -rf mlruns
+          python -m src.model_train --data data/raw/heart.csv --models-dir models --reports-dir reports
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
