@@ -29,7 +29,7 @@ jobs:
         run: pytest -q
       - name: Train models
         run: |
-          rm -rf mlruns
+          rm -rf mlruns mlflow.db
           python -m src.model_train --data data/raw/heart.csv --models-dir models --reports-dir reports
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
