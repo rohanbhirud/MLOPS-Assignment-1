@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-from .data_utils import CleanConfig, clean_dataframe, infer_column_types, load_raw_csv
+from .data_utils import CleanConfig, clean_dataframe, load_raw_csv
 
 
 def plot_histograms(df: pd.DataFrame, output_dir: pathlib.Path) -> None:
