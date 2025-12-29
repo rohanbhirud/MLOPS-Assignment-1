@@ -44,11 +44,20 @@ The saved model artifact (`models/log_reg_pipeline.joblib`) encapsulates the sca
 - **Kubernetes**: A `deployment.yaml` manifest defines the Service and Deployment resources, including readiness and liveness probes to ensure high availability.
 
 **Screenshots:**
-Screenshots demonstrating the deployment and pipeline runs are located in the `docs/screenshots` directory.
+Below are the screenshots demonstrating our deployment and CI/CD success:
+
+![API Swagger UI](screenshots/api_swagger.png)
+*Figure 1: FastAPI Swagger UI running locally*
+
+![API Metrics](screenshots/api_metrics.png)
+*Figure 2: Prometheus Metrics Endpoint*
+
+![GitHub Actions Success](screenshots/github_actions_success.png)
+*Figure 3: Successful CI/CD Pipeline Run*
 
 ## 6. Monitoring
 The API is instrumented with **Prometheus** metrics exposed at the `/metrics` endpoint.
 - **Key Metrics**: We monitor `api_requests_total` and latency to observe traffic patterns and system performance.
 
 ---
-**Link to Code Repository**: [GitHub Repo Link Here]
+**Link to Code Repository**: [https://github.com/rohanbhirud/MLOPS-Assignment-1.git](https://github.com/rohanbhirud/MLOPS-Assignment-1.git)

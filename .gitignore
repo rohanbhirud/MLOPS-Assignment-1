@@ -19,6 +19,3 @@ ENV/
 # System
 .DS_Store
 Thumbs.db
-
-# Assignment PDF
-MLOPS_Assign1.pdf
