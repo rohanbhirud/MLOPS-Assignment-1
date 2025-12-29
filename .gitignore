@@ -20,5 +20,5 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Assignment PDF (Not a deliverable)
+# Assignment PDF
 MLOPS_Assign1.pdf
