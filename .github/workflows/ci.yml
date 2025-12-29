@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Download dataset
+        run: python data/download_data.py --output data/raw/heart.csv
+      - name: Lint with Ruff
+        run: |
+          pip install ruff
+          ruff check src
+      - name: Run tests
+        run: pytest -q
+      - name: Train models
+        run: python -m src.model_train --data data/raw/heart.csv --models-dir models --reports-dir reports
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-and-reports
+          path: |
+            models
+            reports
+            mlruns

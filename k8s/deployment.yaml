@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heart-api
+  labels:
+    app: heart-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: heart-api
+  template:
+    metadata:
+      labels:
+        app: heart-api
+    spec:
+      containers:
+        - name: heart-api
+          image: heart-api:latest # change to your registry/image:tag if pushing to cloud
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MODEL_PATH
+              value: /app/models/log_reg_pipeline.joblib
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: heart-api
+spec:
+  selector:
+    app: heart-api
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  type: LoadBalancer
+---
+# Optional: enable Ingress if your cluster has an ingress controller installed.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: heart-api
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: heart-api.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: heart-api
+                port:
+                  number: 8000

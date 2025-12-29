@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Assignment PDF (Not a deliverable)
+MLOPS_Assign1.pdf
