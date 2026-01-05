@@ -21,6 +21,7 @@ import joblib
 from fastapi import FastAPI, HTTPException, Request, Response
 from pydantic import BaseModel, Field, conlist
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+import pandas as pd
 
 # Feature ordering expected by the model
 FEATURE_COLUMNS = [
@@ -66,9 +67,10 @@ def load_model(model_path: str = DEFAULT_MODEL_PATH):
     return joblib.load(path)
 
 
-def preprocess_payload(payload: PredictRequest):
-    # Convert to list-of-lists aligned with FEATURE_COLUMNS
-    return [rec.values for rec in payload.records]
+def preprocess_payload(payload: PredictRequest) -> pd.DataFrame:
+    # Convert to DataFrame aligned with FEATURE_COLUMNS
+    data = [rec.values for rec in payload.records]
+    return pd.DataFrame(data, columns=FEATURE_COLUMNS)
 
 
 app = FastAPI(title="Heart Disease Prediction API", version="1.0.0")

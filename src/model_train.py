@@ -136,6 +136,11 @@ def train_models(
     # Select best by ROC-AUC mean.
     best = max(reports, key=lambda r: r["metrics"].get("roc_auc_mean", 0))
     best_estimator = best["estimator"]
+
+    # Fit the best estimator on the full dataset before saving
+    print(f"Fitting the best model ({best['name']}) on the full dataset...")
+    best_estimator.fit(X, y)
+
     # Drop estimator before persisting metrics to keep JSON clean.
     for r in reports:
         r.pop("estimator", None)
