@@ -54,16 +54,27 @@ docker run -p 8000:8000 heart-api
 ## ☸️ Kubernetes Deployment
 Deploy the Dockerized API to a Kubernetes cluster (Minikube example).
 
-### 1. Build Image in Cluster
+### 1. Start Minikube
+```bash
+# Start the cluster (uses docker driver by default if available)
+minikube start
+```
+
+### 2. Build Image in Cluster
 ```bash
 # Point local Docker client to Minikube's Docker daemon
+
+# For Bash (Linux/macOS):
 eval "$(minikube docker-env)"
+
+# For PowerShell (Windows):
+minikube docker-env --shell powershell | Invoke-Expression
 
 # Build the image inside Minikube
 docker build -t heart-api .
 ```
 
-### 2. Apply Manifests
+### 3. Apply Manifests
 ```bash
 # Deploy Service and Deployment
 kubectl apply -f k8s/deployment.yaml
@@ -73,7 +84,7 @@ kubectl get pods
 kubectl get svc heart-api
 ```
 
-### 3. Access the Service
+### 4. Access the Service
 ```bash
 # Method A: Port Forward (Simplest)
 kubectl port-forward svc/heart-api 8000:8000
