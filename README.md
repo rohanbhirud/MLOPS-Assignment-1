@@ -24,8 +24,12 @@ python data/download_data.py --output data/raw/heart.csv
 python -m src.eda --data data/raw/heart.csv --out reports/figures
 
 # 4. Train Models
-# Trains LogReg & RandomForest, saves metrics to reports/, and logs to MLflow (mlruns/)
+# Trains LogReg & RandomForest, saves metrics to reports/, and logs to MLflow (mlflow.db)
 python -m src.model_train --data data/raw/heart.csv --models-dir models --reports-dir reports
+
+# 5. View MLflow UI
+# Access experiments at localhost:5000
+mlflow ui
 ```
 
 ### 2. Run API Locally
@@ -36,6 +40,11 @@ uvicorn src.api:app --host 0.0.0.0 --port 8000
 # Test Endpoints:
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/metrics
+
+# Sample Prediction:
+curl -X POST "http://127.0.0.1:8000/predict" \
+     -H "Content-Type: application/json" \
+     -d "{\"records\": [{\"values\": [63.0, 1.0, 3.0, 145.0, 233.0, 1.0, 0.0, 150.0, 0.0, 2.3, 0.0, 0.0, 1.0]}]}"
 ```
 
 ### 3. Docker Containerization
