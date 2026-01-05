@@ -19,3 +19,10 @@ ENV/
 # System
 .DS_Store
 Thumbs.db
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Data
+data/raw/

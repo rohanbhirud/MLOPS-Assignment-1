@@ -73,8 +73,6 @@ def clean_dataframe(df: pd.DataFrame, config: CleanConfig) -> pd.DataFrame:
     feature_cols = [c for c in df.columns if c != config.target_column]
     for col in feature_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
-        # Fill new NaNs (from coercion) with median or most frequent? 
-        # Median is safer for now.
         df[col] = df[col].fillna(df[col].median())
 
     return df

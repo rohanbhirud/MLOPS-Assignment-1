@@ -2,19 +2,19 @@
   {
     "name": "log_reg",
     "metrics": {
-      "test_accuracy_mean": 0.8213661202185791,
-      "test_precision_mean": 0.8252623259370793,
-      "test_recall_mean": 0.8213661202185791,
-      "test_roc_auc_mean": 0.8976809263267598
+      "test_accuracy_mean": 0.818087431693989,
+      "test_precision_mean": 0.820919306505024,
+      "test_recall_mean": 0.818087431693989,
+      "test_roc_auc_mean": 0.899630230880231
     }
   },
   {
     "name": "random_forest",
     "metrics": {
-      "test_accuracy_mean": 0.8112021857923498,
-      "test_precision_mean": 0.8123267231869672,
-      "test_recall_mean": 0.8112021857923498,
-      "test_roc_auc_mean": 0.901875651354818
+      "test_accuracy_mean": 0.8113661202185792,
+      "test_precision_mean": 0.8124420587739218,
+      "test_recall_mean": 0.8113661202185792,
+      "test_roc_auc_mean": 0.89995841350008
     }
   }
 ]
